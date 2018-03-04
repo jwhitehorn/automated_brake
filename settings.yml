@@ -1,7 +1,5 @@
 --- #directories
-  - :path: /Users/jason/Desktop/Encoding/DVD
+  - :path: /etc/automated_brake/to_encode
+    :out_path: /etc/automated_brake/encoded
     :delete: true
-    :command: ./HandBrakeCLI -i $0/$1 -o $0/../Complete/$1.m4v  -e x264 -b 2000 --pfr  -a 1,1 -E faac,copy:ac3 -B 160,160 -6 dpl2,auto -R Auto,Auto -D 0.0,0.0 -f mp4 -4 --height 480 --loose-anamorphic -m --decomb
-  - :path: /Users/jason/Desktop/Encoding/Bluray
-    :delete: true
-    :command: ./HandBrakeCLI -i $0/$1 -o $0/../Complete/$1.m4v  -e x264 -b 3000 --pfr  -a 1,1 -E faac,copy:ac3 -B 160,160 -6 dpl2,auto -R Auto,Auto -D 0.0,0.0 -f mp4 -4 --height 720 --loose-anamorphic -m --decomb
+    :command: HandBrakeCLI -i $0/$1 -o $2/$1.m4v  -e x264 -b 2000 --pfr  -a 1,1 -E faac,copy:ac3 -B 160,160 -6 dpl2,auto -R Auto,Auto -D 0.0,0.0 -f mp4 --height 480 --loose-anamorphic -m --decomb
