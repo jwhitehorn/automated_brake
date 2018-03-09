@@ -1,11 +1,22 @@
 # Overview #
 
+To run with Docker:
 
-TODO: Actually write a readme.
+```
+docker pull jasonwhitehorn/automated_brake:2018.03.08
+
+docker run -d --restart=always \
+  --name automated_brake \
+  --volume /mnt/storage/afp/share/Encoding:/etc/automated_brake/to_encode \
+  --volume /mnt/storage/media/movies:/etc/automated_brake/encoded/movies \
+  --volume /mnt/storage/media/tv_shows:/etc/automated_brake/encoded/tv \
+  --volume /etc/automated_brake.yml:/etc/automated_brake/settings.yml \
+  jasonwhitehorn/automated_brake:2018.03.08
+```
 
 ## License ##
 
-Copyright (c) 2012-2018, [Jason Whitehorn](https://jason.whitehorn.us/) 
+Copyright (c) 2012-2018, [Jason Whitehorn](https://jason.whitehorn.us/)
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
