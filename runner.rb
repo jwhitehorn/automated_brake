@@ -2,7 +2,7 @@
 require 'yaml'
 
 directories = YAML.load_file 'settings.yml'
-command_base = "nice -n 15 HandBrakeCLI -i $0/$1 -o /tmp/$1.m4v $3 && mv /tmp/$1.m4v $2/$1.m4v"
+command_base = "nice -n 15 HandBrakeCLI -i $0/$1 -o /tmp/$4 $3 && mv /tmp/$1.m4v $2/$4"
 
 loop do
   directories.each do |config|
@@ -16,7 +16,10 @@ loop do
       sleep 30
       if first_size == File.size?(filename)
         #the file has not changed in size in 30 seconds, go ahead and begin processing it
-        task = command_base.gsub(/\$0/, dir).gsub(/\$1/, file).gsub(/\$2/, out_path).gsub(/\$3/, options)
+        out_file = file.gsub(/\.[^.]*$/, '') + config[:final_extension]
+        task = command_base.gsub(/\$0/, dir).gsub(/\$1/, file)
+        task = task.gsub(/\$2/, out_path).gsub(/\$3/, options)
+        task = task.gsub(/\$4/, out_file)
         puts task
         puts system task
         File.unlink(filename) if config[:delete]
