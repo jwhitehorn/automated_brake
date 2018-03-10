@@ -2,7 +2,7 @@
 require 'yaml'
 
 directories = YAML.load_file 'settings.yml'
-command_base = "nice -n 15 HandBrakeCLI -i $0/$1 -o /tmp/$4 $3 && mv /tmp/$1.m4v $2/$4"
+command_base = "nice -n 15 HandBrakeCLI -i $0/$1 -o /tmp/$4 $3 && mv /tmp/$4 $2/$4"
 
 loop do
   directories.each do |config|
