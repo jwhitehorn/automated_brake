@@ -16,13 +16,19 @@ loop do
       sleep 30
       if first_size == File.size?(filename)
         #the file has not changed in size in 30 seconds, go ahead and begin processing it
-        out_file = file.gsub(/\.[^.]*$/, '') + "." + config[:final_extension]
-        task = command_base.gsub(/\$0/, dir).gsub(/\$1/, file)
-        task = task.gsub(/\$2/, out_path).gsub(/\$3/, options)
-        task = task.gsub(/\$4/, out_file)
-        puts task
-        puts system task
-        File.unlink(filename) if config[:delete]
+        if options
+          out_file = file.gsub(/\.[^.]*$/, '') + "." + config[:final_extension]
+          task = command_base.gsub(/\$0/, dir).gsub(/\$1/, file)
+          task = task.gsub(/\$2/, out_path).gsub(/\$3/, options)
+          task = task.gsub(/\$4/, out_file)
+          puts task
+          puts system task
+          File.unlink(filename) if config[:delete]
+        elsif config[:delete]
+          FileUtils.mv(filename, out_path)
+        else
+          FileUtils.cp(filename, out_path)
+        end
       end
     end
   end
