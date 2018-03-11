@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'yaml'
+require 'fileutils'
 
 directories = YAML.load_file 'settings.yml'
 command_base = "nice -n 15 HandBrakeCLI -i $0/$1 -o /tmp/$4 $3 && mv /tmp/$4 $2/$4"
